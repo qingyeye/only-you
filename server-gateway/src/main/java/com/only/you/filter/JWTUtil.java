@@ -1,0 +1,92 @@
+package com.only.you.filter;
+
+import com.alibaba.fastjson.JSON;
+import io.jsonwebtoken.*;
+
+import java.io.Serializable;
+import java.time.Duration;
+import java.util.Date;
+
+public class JWTUtil {
+    private final static String TOKEN_SECRET = "game_token#$%Abc";
+
+    public static String createToken(TokenContent tokenContent,Duration expire) {
+        if(expire == null) {
+            throw new IllegalArgumentException("expire 不能为空");
+        }
+        SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;//使用对称加密算法生成签名
+        long nowMillis = System.currentTimeMillis();
+        Date now = new Date(nowMillis);
+        String subject = JSON.toJSONString(tokenContent);
+        JwtBuilder builder = Jwts.builder().setId(String.valueOf(nowMillis)).setIssuedAt(now).setSubject(subject).signWith(signatureAlgorithm, TOKEN_SECRET);
+        //这里是计算过期时间的
+        long expMillis = nowMillis + expire.toMillis();
+        Date exp = new Date(expMillis);
+        builder.setExpiration(exp);
+        return builder.compact();
+    }
+
+    public static TokenContent getTokenContent(String token)  {
+            Claims claims = Jwts.parser().setSigningKey(TOKEN_SECRET).parseClaimsJws(token).getBody();
+            String subject = claims.getSubject();
+            TokenContent tokenBody = JSON.parseObject(subject, TokenContent.class);
+            return tokenBody;
+
+    }
+
+    public static class TokenContent implements Serializable {
+        
+        private String openId;
+        private String userId;
+        private long playerId;
+        private String serverId;
+        private int loginType;
+        private String publicKey;//与客户端交互的公钥
+        private String gatewayIp;//网关ip地址
+        
+        public String getGatewayIp() {
+            return gatewayIp;
+        }
+        public void setGatewayIp(String gatewayIp) {
+            this.gatewayIp = gatewayIp;
+        }
+        public String getPublicKey() {
+            return publicKey;
+        }
+        public void setPublicKey(String publicKey) {
+            this.publicKey = publicKey;
+        }
+        public String getOpenId() {
+            return openId;
+        }
+        public void setOpenId(String openId) {
+            this.openId = openId;
+        }
+        public String getUserId() {
+            return userId;
+        }
+        public void setUserId(String userId) {
+            this.userId = userId;
+        }
+        public long getPlayerId() {
+            return playerId;
+        }
+        public void setPlayerId(long playerId) {
+            this.playerId = playerId;
+        }
+        public String getServerId() {
+            return serverId;
+        }
+        public void setServerId(String serverId) {
+            this.serverId = serverId;
+        }
+        public int getLoginType() {
+            return loginType;
+        }
+        public void setLoginType(int loginType) {
+            this.loginType = loginType;
+        }
+    }
+
+ 
+}

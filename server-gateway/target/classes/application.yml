@@ -1,0 +1,7 @@
+spring:
+  #指定目前的配置文件
+  profiles:
+    active:
+      test
+
+
