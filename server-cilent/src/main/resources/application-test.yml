@@ -1,0 +1,20 @@
+server:
+  port: 8989
+
+spring:
+  application:
+    name: server-cilent
+
+eureka:
+  instance:
+    instance-id: ${spring.cloud.client.ipaddress}:${spring.application.name}:${server.port}
+    prefer-ip-address: true #注册服务的时候使用服务的IP地址
+    lease-renewal-interval-in-seconds: 1
+    lease-expiration-duration-in-seconds: 5
+  client:
+    healthcheck:
+      enabled: true
+    serviceUrl: #注册中心的注册地址
+      defaultZone: http://127.0.0.1:8888/eureka/
+    fetch-registry: true
+    register-with-eureka: true
