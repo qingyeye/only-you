@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/only-you.iml" filepath="$PROJECT_DIR$/only-you.iml" />
+      <module fileurl="file://$PROJECT_DIR$/server-api/server-api.iml" filepath="$PROJECT_DIR$/server-api/server-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/server-cilent/server-cilent.iml" filepath="$PROJECT_DIR$/server-cilent/server-cilent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/server-common/server-common.iml" filepath="$PROJECT_DIR$/server-common/server-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/server-eureka/server-eureka.iml" filepath="$PROJECT_DIR$/server-eureka/server-eureka.iml" />
+      <module fileurl="file://$PROJECT_DIR$/server-gateway/server-gateway.iml" filepath="$PROJECT_DIR$/server-gateway/server-gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/server-task/server-task.iml" filepath="$PROJECT_DIR$/server-task/server-task.iml" />
+      <module fileurl="file://$PROJECT_DIR$/server-user/server-user.iml" filepath="$PROJECT_DIR$/server-user/server-user.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>非模块化方式使用layui</title>
+	<link rel="stylesheet" href="layui-v2.4.3/layui/css/layui.css">
+</head>
+<body>
+
+<br>
+
+	<button class="layui-btn layui-btn-radius" onclick="toShowInfo('toGetAllAccounts')">请求用户下所有账户</button>
+	<button class="layui-btn layui-btn-radius" onclick="toShowInfo('toGetAccountInfo')">请求用户下所有账户下币种和币种数量信息</button>
+	<button class="layui-btn layui-btn-radius" onclick="toShowInfo('toGetAccountInfoForNoZero')">请求用户下所有账户下币种和币种数量信息(不为0)</button>
+	<blockquote class="layui-elem-quote layui-text">
+		测试<a href="quartz" target="_blank">任务管理</a>
+	</blockquote>
+	<!--<div class="site-title">-->
+		<!--<fieldset><legend><a name="pane">表单方框风格</a></legend></fieldset>-->
+	<!--</div>-->
+</br>
+</br>
+	<form class="layui-form" action="job/test/huobi/api/toGetAllAccounts" id="toGetAllAccounts">
+		<div class="layui-form-item">
+			<label class="layui-form-label">apiKey：</label>
+			<div class="layui-input-block">
+				<input type="text" name="apiKey" required  lay-verify="required" placeholder="请输入apiKey" autocomplete="off" class="layui-input">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">sercertKey：</label>
+			<div class="layui-input-block">
+				<input type="text" name="sercertKey" required  lay-verify="required" placeholder="请输入sercertKey" autocomplete="off" class="layui-input">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<div class="layui-input-block">
+				<button class="layui-btn" lay-submit lay-filter="formDemo"  type="button" onclick="togetInfo(this)">立即提交</button>
+				<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+			</div>
+		</div>
+	</form>
+
+	<form class="layui-form" action="job/test/huobi/api/toGetAccountInfo" id="toGetAccountInfo">
+		<div class="layui-form-item">
+			<label class="layui-form-label">apiKey：</label>
+			<div class="layui-input-block">
+				<input type="text" name="apiKey" required  lay-verify="required" placeholder="请输入apiKey" autocomplete="off" class="layui-input">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">sercertKey：</label>
+			<div class="layui-input-block">
+				<input type="text" name="sercertKey" required  lay-verify="required" placeholder="请输入sercertKey" autocomplete="off" class="layui-input">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">是否请求HADAX：</label>
+			<div class="layui-input-block">
+				<input type="radio" name="isHadax" value="true" title="是">
+				<input type="radio" name="isHadax" value="false" title="否" checked>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<div class="layui-input-block">
+				<button class="layui-btn" lay-submit lay-filter="formDemo"  type="button"  onclick="togetInfo(this)">立即提交</button>
+				<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+			</div>
+		</div>
+	</form>
+
+	<form class="layui-form" action="job/test/huobi/api/toGetAccountInfoForNoZero" id="toGetAccountInfoForNoZero">
+		<div class="layui-form-item">
+			<label class="layui-form-label">apiKey：</label>
+			<div class="layui-input-block">
+				<input type="text" name="apiKey" required  lay-verify="required" placeholder="请输入apiKey" autocomplete="off" class="layui-input">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">sercertKey：</label>
+			<div class="layui-input-block">
+				<input type="text" name="sercertKey" required  lay-verify="required" placeholder="请输入sercertKey" autocomplete="off" class="layui-input">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">是否请求HADAX：</label>
+			<div class="layui-input-block">
+				<input type="radio" name="isHadax" value="true" title="是">
+				<input type="radio" name="isHadax" value="false" title="否" checked>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<div class="layui-input-block">
+				<button class="layui-btn" lay-submit lay-filter="formDemo"  type="button"  onclick="togetInfo(this)">立即提交</button>
+				<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+			</div>
+		</div>
+	</form>
+	<div class="layui-form-item layui-form-text">
+		<label class="layui-form-label">结果</label>
+		<div class="layui-input-block">
+			<textarea name="desc" placeholder="请输入内容" class="layui-textarea" id="getResultFor"></textarea>
+		</div>
+	</div>
+</div>
+
+<!-- 你的HTML代码 -->
+
+<script src="libs/jquery-3.2.1.min.js"></script>
+<script src="layui-v2.4.3/layui/layui.all.js"></script>
+<script>
+    //由于模块都一次性加载，因此不用执行 layui.use() 来加载对应模块，直接使用即可：
+    !function () {
+        var layer = layui.layer
+            ,form = layui.form;
+
+        layer.msg('Hello World');
+    }();
+    $("form").hide();
+    function togetInfo(o) {
+        $.ajax({
+            type : "GET",
+            url : $(o).parents("form").attr("action"),
+            data : $(o).parents("form").serialize(),
+            dataType : "json",
+            success : function (data) {
+                $("#getResultFor").text(JSON.stringify(data));
+            }
+        });
+    }
+    function toShowInfo(formId) {
+        $("form").hide();
+        $("#" + formId).show();
+    }
+</script>
+
+
+</body>
+</html>

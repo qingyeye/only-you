@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.only.you.dao.TaskLogMapper" >
+    <sql id="taskLogList">
+        task_id,task_name,task_group,task_desc,task_exec_class,task_start_time,
+        task_end_time,task_run_time
+    </sql>
+    <select id="getTaskLog" resultType="com.only.you.entity.TaskLog">
+        select <include refid="taskLogList"/>
+        from task_log
+        <where>
+            <if test="taskName != null and taskName != ''">
+                task_name=#{taskName}
+            </if>
+        </where>
+        order by task_id desc
+    </select>
+    <insert id="insertTaskLog" useGeneratedKeys="true" keyProperty="taskLog.taskId">
+        insert into task_log(task_id,task_name,task_group,task_desc,task_exec_class,
+        task_start_time,task_end_time,task_run_time)
+        values (#{taskLog.taskId},#{taskLog.taskName},#{taskLog.taskGroup},#{taskLog.taskDesc},#{taskLog.taskExecClass},
+        #{taskLog.taskStartTime},#{taskLog.taskEndTime},#{taskLog.taskRunTime})
+    </insert>
+    <update id="updateTaskLog">
+        update task_log
+        <set>
+            <if test="taskLog.taskName != null and taskLog.taskName != ''">
+                task_name=#{taskLog.taskName},
+            </if>
+            <if test="taskLog.taskGroup != null and taskLog.taskGroup!= ''">
+                task_group=#{taskLog.taskGroup},
+            </if>
+            <if test="taskLog.taskDesc != null and taskLog.taskDesc != ''">
+                task_desc=#{taskLog.taskDesc},
+            </if>
+            <if test="taskLog.taskExecClass != null and taskLog.taskExecClass != ''">
+                task_exec_class=#{taskLog.taskExecClass},
+            </if>
+            <if test="taskLog.taskStartTime != null">
+                task_start_time=#{taskLog.taskStartTime},
+            </if>
+            <if test="taskLog.taskEndTime != null">
+                task_end_time=#{taskLog.taskEndTime},
+            </if>
+            <if test="taskLog.taskRunTime != null">
+                task_run_time=#{taskLog.taskRunTime},
+            </if>
+        </set>
+        where
+        task_id=#{taskId}
+    </update>
+</mapper>

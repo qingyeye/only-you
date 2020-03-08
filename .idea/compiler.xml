@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="server-api" />
+        <module name="server-cilent" />
+        <module name="server-common" />
+        <module name="server-eureka" />
+        <module name="server-gateway" />
+        <module name="server-task" />
+        <module name="server-user" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="only-you" target="1.8" />
+      <module name="server-api" target="1.8" />
+      <module name="server-cilent" target="1.8" />
+      <module name="server-common" target="1.8" />
+      <module name="server-eureka" target="1.8" />
+      <module name="server-gateway" target="1.8" />
+      <module name="server-task" target="1.8" />
+      <module name="server-user" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

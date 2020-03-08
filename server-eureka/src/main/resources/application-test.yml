@@ -1,0 +1,14 @@
+server:
+  port: 8888 #eureka默认端口
+eureka:
+  environment: produt #修改eureka客户端的 environment 的名称
+  datacenter: cloud #修改eureka客户端的 datacenter 的名称
+  client:
+    register-with-eureka: false  #这两行false意思是:不要把他当成client而只当成eureka的server 因为现在是单机版
+    fetch-registry: false
+    service-url: #一个eureka本身是有一个client的 高可用的时候,每一个注册列表都需要数据同步
+      defaultZone: http://localhost:8888/eureka #想把eureka注册到哪个url
+
+
+
+

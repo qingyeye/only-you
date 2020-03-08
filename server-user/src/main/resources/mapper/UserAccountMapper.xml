@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.only.you.dao.UserAccountMapper">
+
+    <insert id="insertUserReturnId" useGeneratedKeys="true" keyProperty="id" parameterType="com.only.you.entity.User">
+
+    INSERT INTO `app_user` (`user_id`, `user_name`) VALUES ( #{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR});
+
+    </insert>
+    <select id="getUserByUserId" parameterType="com.only.you.entity.User" resultType="com.only.you.entity.User">
+        select id,user_id,user_name from app_user
+        <where>
+            1=1
+            <if test="userId != null and userId != ''">
+               and user_id = #{userId,jdbcType=VARCHAR}
+            </if>
+            <if test="userName != null and userName != ''">
+                and user_name = #{userName,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+</mapper>
