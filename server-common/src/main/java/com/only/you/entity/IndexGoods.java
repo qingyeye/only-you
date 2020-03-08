@@ -14,5 +14,7 @@ public class IndexGoods implements Serializable {
 
     private String itemId;
 
+    private String goods;
+
 
 }
