@@ -2,6 +2,7 @@ package com.only.you.response;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
 
@@ -12,10 +13,13 @@ import java.io.Serializable;
 public class ServerResponse<T> implements Serializable {
 
 	private static final long serialVersionUID = -392932172522246436L;
-
+    @ApiModelProperty(value = "是否成功")
 	private int status;
+    @ApiModelProperty(value = "信息")
     private String msg;
+    @ApiModelProperty(value = "对象")
     private Object extData ;
+    @ApiModelProperty(value = "对象")
     private T data;
 
 
